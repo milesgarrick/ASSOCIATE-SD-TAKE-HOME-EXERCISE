@@ -1,0 +1,38 @@
+{
+  "shelter": {
+    "kennel1":{
+      "size": "large",
+      "animal": {
+        "species": "Dog",
+        "name": "Fido",
+        "breed": "Labrador",
+        "color": "brown"
+      }
+    },
+    "kennel2":{
+      "size": "medium",
+      "animal": {
+        "species": "Dog",
+        "name": "Rover",
+        "breed": "Poodle",
+        "color": "white"
+      }
+    },
+    "kennel3":{
+      "size": "small",
+      "animal": {
+        "species": "Cat",
+        "name": "Mittens",
+        "color": "black and white"
+      }
+    },
+    "kennel4":{
+      "size": "small",
+      "animals": {
+        "species": "Cat",
+        "name": "Fluffy",
+        "color": "gray"
+      }
+    }
+  }
+}

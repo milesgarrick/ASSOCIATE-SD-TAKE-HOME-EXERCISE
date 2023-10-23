@@ -1,0 +1,64 @@
+{
+  "kennels": [
+    {
+      "id": 1,
+      "size": "s",
+      "type": "corner"
+    },
+    {
+      "id": 2,
+      "size": "s",
+      "type": "corner"
+    },
+    {
+      "id": 3,
+      "size": "s",
+      "type": "middle"
+    },
+    {
+      "id": 4,
+      "size": "m",
+      "type": "middle"
+    },
+    {
+      "id": 5,
+      "size": "m",
+      "type": "middle"
+    },
+    {
+      "id": 6,
+      "size": "l",
+      "type": "middle"
+    }
+  ],
+  "animals": [
+    {
+      "id": 1,
+      "type": "dog",
+      "breed": "labrador",
+      "name": "Fido",
+      "kennelId": 5
+    },
+    {
+      "id": 2,
+      "type": "cat",
+      "breed": "domestic long hair",
+      "name": "Felix",
+      "kennelId": 3
+    },
+    {
+      "id": 3,
+      "type": "dog",
+      "breed": "beagle",
+      "name": "Rover",
+      "kennelId": 4
+    },
+    {
+      "id": 4,
+      "type": "cat",
+      "breed": "domestic short hair",
+      "name": "Sylvester",
+      "kennelId": 2
+    }
+  ]
+}
