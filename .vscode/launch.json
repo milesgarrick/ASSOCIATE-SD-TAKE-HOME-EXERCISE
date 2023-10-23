@@ -1,0 +1,36 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Launch Node and open in Chrome",
+      "configurations": [
+        "Launch Node",
+        "Launch Chrome"
+      ]
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Launch Node",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "pnpm dev",
+      "presentation": {
+        "hidden": true
+      }
+    },
+    {
+      "name": "Launch Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "presentation": {
+        "hidden": true
+      }
+    }
+  ]
+}
