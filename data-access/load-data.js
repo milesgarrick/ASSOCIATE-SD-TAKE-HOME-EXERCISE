@@ -13,21 +13,18 @@ export function loadData() {
 }
 
 /**
- * Sorts by Dog then Cat, then sorts by kennel size if same type.
+ * Sorts by dog then cat, then sorts by kennel size if same type.
  *
  * @param {Animal} a
  * @param {Animal} b
  * @returns {Animal}
  */
 function sortFunction(a, b) {
-  console.log(a.type, b.type);
   if (a.type === b.type) {
     return compareKennelSize(a, b);
-  } else if (a.type === 'Dog') {
-    console.log(a.name + '>' + b.name);
+  } else if (a.type === 'dog') {
     return -1;
   } else {
-    console.log(b.name + '>' + a.name);
     return 1;
   }
 }
@@ -40,11 +37,11 @@ function sortFunction(a, b) {
  * @returns {Animal}
  */
 function compareKennelSize(a, b) {
-  if (a.kennelSize === 'Small') return -1;
-  else if (b.kennelSize === 'Small') return 1;
-  else if (a.kennelSize === 'Medium') return -1;
-  else if (b.kennelSize === 'Medium') return 1;
-  else return -1;
+  if (a.kennelSize === 'small') return 1;
+  else if (b.kennelSize === 'small') return -1;
+  else if (a.kennelSize === 'medium') return 1;
+  else if (b.kennelSize === 'medium') return -1;
+  else return 1;
 }
 
 /**
@@ -84,7 +81,6 @@ function transformPetSanctuaryData(petSanctuary) {
   const animals = [];
   const kennels = Object.getOwnPropertyNames(petSanctuary.shelter);
   kennels.forEach((kennel) => {
-    console.log(kennel);
     animals.push(transformPetSanctuary(petSanctuary.shelter[kennel]));
   });
   return animals;
@@ -108,11 +104,8 @@ function mergeAndSortData(petProject, petSanctuary) {
   const allAnimals = petProjectTransformed
     .concat(petSanctuaryTransformed)
     .sort(sortFunction);
-  console.log(allAnimals);
 
-  return petProjectTransformed
-    .concat(petSanctuaryTransformed)
-    .sort(sortFunction);
+  return allAnimals;
 }
 
 /**
@@ -127,14 +120,14 @@ function transformPetSanctuary(kennel) {
   const animal = {};
   const animalProp = Object.getOwnPropertyNames(kennel)[1]; // Fixed bug with varying property name
   animal.type = kennel[animalProp].species.toLowerCase(); // Fixed property name in right operand
-  animal.name = kennel[animalProp].name;
+  animal.name = kennel[animalProp].name.toLowerCase();
   if ('breed' in kennel[animalProp]) {
     // Fixed bug occurring on missing breed property
     animal.breed = kennel[animalProp].breed.toLowerCase();
   } else {
     animal.breed = 'Unknown';
   }
-  animal.kennelSize = kennel.size;
+  animal.kennelSize = kennel.size.toLowerCase();
   return animal;
 }
 
