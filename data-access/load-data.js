@@ -89,9 +89,11 @@ function transformPetProjectData(petProject) {
  */
 function transformPetSanctuaryData(petSanctuary) {
   const animals = [];
-  let kennels = Object.entries(petSanctuary.shelter);
+  const kennels = Object.getOwnPropertyNames(petSanctuary.shelter);
+  //const kennels = Object.entries(petSanctuary.shelter);
   kennels.forEach((kennel) => {
-    animals.push(transformPetSanctuary(kennel));
+    console.log(kennel);
+    animals.push(transformPetSanctuary(petSanctuary.shelter[kennel]));
     //    var newType;
     //    var newName;
     //    var newBreed;
@@ -167,9 +169,15 @@ function mergeAndSortData(petProject, petSanctuary) {
  */
 function transformPetSanctuary(kennel) {
   const animal = {};
-  animal.type = kennel.animal.species.toLowerCase(); // Fixed property name in right operand
-  animal.name = kennel.animal.name;
-  animal.breed = kennel.animal.breed.toLowerCase();
+  const animalProp = Object.getOwnPropertyNames(kennel)[1]; // Fixed bug with varying property name
+  animal.type = kennel[animalProp].species.toLowerCase(); // Fixed property name in right operand
+  animal.name = kennel[animalProp].name;
+  if ('breed' in kennel[animalProp]) {
+    // Fixed bug occurring on missing breed property
+    animal.breed = kennel[animalProp].breed.toLowerCase();
+  } else {
+    animal.breed = 'Unknown';
+  }
   animal.kennelSize = kennel.size;
   return animal;
 }
