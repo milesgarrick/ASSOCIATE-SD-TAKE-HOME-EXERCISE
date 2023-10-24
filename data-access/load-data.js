@@ -73,6 +73,8 @@ function transformPetProjectData(petProject) {
 }
 
 /**
+ * Kept this wrapper function to separate pre-existing code for the purposes of
+ * this assessment.  This function calls the fixed transformPetSanctuary function.
  *
  * @param {PetSanctuary} petSanctuary
  * @returns {Animal[]}
@@ -119,7 +121,7 @@ function mergeAndSortData(petProject, petSanctuary) {
 function transformPetSanctuary(kennel) {
   const animal = {};
   const animalProp = Object.getOwnPropertyNames(kennel)[1]; // Fixed bug with varying property name
-  animal.type = kennel[animalProp].species.toLowerCase(); // Fixed property name in right operand
+  animal.type = kennel[animalProp].species.toLowerCase(); // Fixed property name in right operand (type -> species)
   animal.name = kennel[animalProp].name.toLowerCase();
   if ('breed' in kennel[animalProp]) {
     // Fixed bug occurring on missing breed property
