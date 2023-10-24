@@ -48,19 +48,6 @@ function compareKennelSize(a, b) {
 }
 
 /**
- * @TODO Write this function
- *
- * Merges data from both sources and sorts it first by animal type (cat/dog) and
- * then by kennel size.
- *
- * Any missing data should be replaced with the string "Unknown".
- *
- * @param {PetProject} petProject
- * @param {PetSanctuary} petSanctuary
- * @returns {Animal[]}
- */
-
-/**
  * Maps kennel IDs to sizes, then iterates through the array, storing values and
  * applying title case.
  *
@@ -95,54 +82,71 @@ function transformPetProjectData(petProject) {
   return animals;
 }
 
+/**
+ *
+ * @param {PetSanctuary} petSanctuary
+ * @returns {Animal[]}
+ */
 function transformPetSanctuaryData(petSanctuary) {
   const animals = [];
   let kennels = Object.entries(petSanctuary.shelter);
   kennels.forEach((kennel) => {
-    var newType;
-    var newName;
-    var newBreed;
-    var newKennelSize = kennel[1].size;
-    if (kennel[1].animal) {
-      newType = kennel[1].animal.species;
-      newName = kennel[1].animal.name;
-      if (kennel[1].animal.breed) {
-        newBreed = kennel[1].animal.breed;
-      } else {
-        newBreed = 'Unknown';
-      }
-    } else {
-      //Accounts for potential typo in the animal key
-      newType = kennel[1].animals.species;
-      newName = kennel[1].animals.name;
-      if (kennel[1].animals.breed) {
-        newBreed = kennel[1].animals.breed;
-      } else {
-        newBreed = 'Unknown';
-      }
-    }
-
-    newType = newType.charAt(0).toUpperCase() + newType.slice(1);
-    newName = newName.charAt(0).toUpperCase() + newName.slice(1);
-    newBreed = newBreed.charAt(0).toUpperCase() + newBreed.slice(1);
-    newKennelSize =
-      newKennelSize.charAt(0).toUpperCase() + newKennelSize.slice(1);
-    var animal = {
-      type: newType,
-      name: newName,
-      breed: newBreed,
-      kennelSize: newKennelSize,
-    };
-
-    animals.push(animal);
+    animals.push(transformPetSanctuary(kennel));
+    //    var newType;
+    //    var newName;
+    //    var newBreed;
+    //    var newKennelSize = kennel[1].size;
+    //    if (kennel[1].animal) {
+    //      newType = kennel[1].animal.species;
+    //      newName = kennel[1].animal.name;
+    //      if (kennel[1].animal.breed) {
+    //        newBreed = kennel[1].animal.breed;
+    //      } else {
+    //        newBreed = 'Unknown';
+    //      }
+    //    } else {
+    //      //Accounts for potential typo in the animal key
+    //      newType = kennel[1].animals.species;
+    //      newName = kennel[1].animals.name;
+    //      if (kennel[1].animals.breed) {
+    //        newBreed = kennel[1].animals.breed;
+    //      } else {
+    //        newBreed = 'Unknown';
+    //      }
   });
+
+  //    newType = newType.charAt(0).toUpperCase() + newType.slice(1);
+  //    newName = newName.charAt(0).toUpperCase() + newName.slice(1);
+  //    newBreed = newBreed.charAt(0).toUpperCase() + newBreed.slice(1);
+  //    newKennelSize =
+  //      newKennelSize.charAt(0).toUpperCase() + newKennelSize.slice(1);
+  //    var animal = {
+  //      type: newType,
+  //      name: newName,
+  //      breed: newBreed,
+  //      kennelSize: newKennelSize,
+  //    };
+  //
+  //    animals.push(animal);
+  //  });
   return animals;
 }
 
+/**
+ * @TODO Write this function
+ *
+ * Merges data from both sources and sorts it first by animal type (cat/dog) and
+ * then by kennel size.
+ *
+ * Any missing data should be replaced with the string "Unknown".
+ *
+ * @param {PetProject} petProject
+ * @param {PetSanctuary} petSanctuary
+ * @returns {Animal[]}
+ */
 function mergeAndSortData(petProject, petSanctuary) {
   const petProjectTransformed = transformPetProjectData(petProject);
   const petSanctuaryTransformed = transformPetSanctuaryData(petSanctuary);
-
   const allAnimals = petProjectTransformed
     .concat(petSanctuaryTransformed)
     .sort(sortFunction);
@@ -163,7 +167,7 @@ function mergeAndSortData(petProject, petSanctuary) {
  */
 function transformPetSanctuary(kennel) {
   const animal = {};
-  animal.type = kennel.animal.type.toLowerCase();
+  animal.type = kennel.animal.species.toLowerCase(); // Fixed property name in right operand
   animal.name = kennel.animal.name;
   animal.breed = kennel.animal.breed.toLowerCase();
   animal.kennelSize = kennel.size;
