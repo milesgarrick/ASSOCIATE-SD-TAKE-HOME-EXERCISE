@@ -65,18 +65,11 @@ function transformPetProjectData(petProject) {
     [6, 'large'],
   ]);
   petProject.animals.forEach((e) => {
-    var newType = e.type.charAt(0).toUpperCase() + e.type.slice(1);
-    var newName = e.name.charAt(0).toUpperCase() + e.name.slice(1);
-    var newBreed = e.breed.charAt(0).toUpperCase() + e.breed.slice(1);
-    var newKennelSize =
-      kennelMap.get(e.kennelId).charAt(0).toUpperCase() +
-      kennelMap.get(e.kennelId).slice(1);
-    var animal = {
-      type: newType,
-      name: newName,
-      breed: newBreed,
-      kennelSize: newKennelSize,
-    };
+    let animal = {};
+    animal.Type = e.type.toLowerCase();
+    animal.name = e.name.toLowerCase();
+    animal.breed = e.breed.toLowerCase();
+    animal.kennelSize = kennelMap.get(e.kennelId);
     animals.push(animal);
   });
   return animals;
@@ -90,47 +83,10 @@ function transformPetProjectData(petProject) {
 function transformPetSanctuaryData(petSanctuary) {
   const animals = [];
   const kennels = Object.getOwnPropertyNames(petSanctuary.shelter);
-  //const kennels = Object.entries(petSanctuary.shelter);
   kennels.forEach((kennel) => {
     console.log(kennel);
     animals.push(transformPetSanctuary(petSanctuary.shelter[kennel]));
-    //    var newType;
-    //    var newName;
-    //    var newBreed;
-    //    var newKennelSize = kennel[1].size;
-    //    if (kennel[1].animal) {
-    //      newType = kennel[1].animal.species;
-    //      newName = kennel[1].animal.name;
-    //      if (kennel[1].animal.breed) {
-    //        newBreed = kennel[1].animal.breed;
-    //      } else {
-    //        newBreed = 'Unknown';
-    //      }
-    //    } else {
-    //      //Accounts for potential typo in the animal key
-    //      newType = kennel[1].animals.species;
-    //      newName = kennel[1].animals.name;
-    //      if (kennel[1].animals.breed) {
-    //        newBreed = kennel[1].animals.breed;
-    //      } else {
-    //        newBreed = 'Unknown';
-    //      }
   });
-
-  //    newType = newType.charAt(0).toUpperCase() + newType.slice(1);
-  //    newName = newName.charAt(0).toUpperCase() + newName.slice(1);
-  //    newBreed = newBreed.charAt(0).toUpperCase() + newBreed.slice(1);
-  //    newKennelSize =
-  //      newKennelSize.charAt(0).toUpperCase() + newKennelSize.slice(1);
-  //    var animal = {
-  //      type: newType,
-  //      name: newName,
-  //      breed: newBreed,
-  //      kennelSize: newKennelSize,
-  //    };
-  //
-  //    animals.push(animal);
-  //  });
   return animals;
 }
 
